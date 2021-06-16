@@ -1,11 +1,9 @@
-import Button from 'components/Button';
-import { useRouter } from 'next/router';
-import Title from 'components/Title';
-import Layout from 'Layout';
-
+import Input from 'components/Input/Input';
+import Modal from 'container/Modal/Modal';
 export default function Home() {
-  const router = useRouter();
-
-  console.log(router);
-  return <Layout></Layout>;
+  return (
+    <div>
+      <Modal />
+    </div>
+  );
 }
