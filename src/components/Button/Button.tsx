@@ -12,8 +12,6 @@ interface ButtonProps {
 function Button({ children, href, onClick }: ButtonProps) {
   const router = useRouter();
 
-  console.log(router);
-
   return (
     <S.Button onClick={onClick} active={href === router.pathname}>
       {href ? <Link href={`${href}`}>{children}</Link> : children}

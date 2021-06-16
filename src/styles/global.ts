@@ -11,7 +11,7 @@ export default createGlobalStyle`
     font-size: 16px;
   }
 
-  ul,ol {
+  ul,ol, li {
     padding: 0;
     margin: 0;
     list-style: none;

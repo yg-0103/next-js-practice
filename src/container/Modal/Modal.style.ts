@@ -14,7 +14,8 @@ export const Overlay = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  width: 800px;
   padding: 30px;
+  max-height: 700px;
+  overflow: auto;
   background-color: #fff;
 `;
