@@ -1,26 +1,22 @@
 import * as S from './SearchForm.style';
 import Input from 'components/Input';
 import Button from 'components/Button';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getYoutube } from 'modules/youtube/slice';
+import React from 'react';
 
-export default function SearchForm() {
-  const [keyword, setKeyword] = useState('');
-  const dispatch = useDispatch();
-  const handleChangeKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value);
-  };
+interface SearchFormProps {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  keyword: string;
+}
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(getYoutube(keyword));
-    setKeyword('');
-  };
-
+export default function SearchForm({
+  keyword,
+  onSubmit,
+  onChange,
+}: SearchFormProps) {
   return (
-    <S.Form onSubmit={handleSubmit}>
-      <Input keyword={keyword} onChange={handleChangeKeyword} />
+    <S.Form onSubmit={onSubmit}>
+      <Input keyword={keyword} onChange={onChange} />
       <Button>검색</Button>
     </S.Form>
   );

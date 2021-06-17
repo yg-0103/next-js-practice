@@ -5,15 +5,22 @@ import { useRouter } from 'next/router';
 
 interface ButtonProps {
   children: React.ReactNode;
+  className?: string;
+  value?: string;
   href?: string;
   onClick?: () => void;
 }
 
-function Button({ children, href, onClick }: ButtonProps) {
+function Button({ children, href, onClick, value, className }: ButtonProps) {
   const router = useRouter();
 
   return (
-    <S.Button onClick={onClick} active={href === router.pathname}>
+    <S.Button
+      className={className}
+      value={value}
+      onClick={onClick}
+      active={href === router.pathname}
+    >
       {href ? <Link href={`${href}`}>{children}</Link> : children}
     </S.Button>
   );

@@ -1,20 +1,37 @@
 import * as S from './RecentSearch.style';
 import Button from 'components/Button';
+import { useDispatch } from 'react-redux';
+import { getYoutube } from 'modules/youtube/slice';
 
-export default function RecentSearch() {
+interface RecentSearchProps {
+  recentSearchWord: string[];
+  onClick: (keyword: string) => void;
+}
+
+export default function RecentSearch({
+  recentSearchWord,
+  onClick,
+}: RecentSearchProps) {
+  const dispatch = useDispatch();
+
   return (
     <S.RecentSearchContainer>
       <span>최근 검색어:</span>
       <S.SearchWordList>
-        <S.SearchWordItem>
-          <Button>javascript</Button>
-        </S.SearchWordItem>
-        <S.SearchWordItem>
-          <Button>react</Button>
-        </S.SearchWordItem>{' '}
-        <S.SearchWordItem>
-          <Button>nextjs</Button>
-        </S.SearchWordItem>
+        {recentSearchWord &&
+          recentSearchWord.map(keyword => (
+            <S.SearchWordItem key={keyword}>
+              <Button
+                value={keyword}
+                onClick={() => {
+                  dispatch(getYoutube(keyword));
+                  onClick(keyword);
+                }}
+              >
+                {keyword}
+              </Button>
+            </S.SearchWordItem>
+          ))}
       </S.SearchWordList>
     </S.RecentSearchContainer>
   );

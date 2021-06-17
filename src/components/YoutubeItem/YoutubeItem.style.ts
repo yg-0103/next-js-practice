@@ -16,4 +16,8 @@ export const YoutubeItemContainer = styled.li`
     color: gray;
     font-size: 0.85rem;
   }
+
+  span + span {
+    margin-bottom: 10px;
+  }
 `;

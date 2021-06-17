@@ -22,11 +22,40 @@ const youtubeSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    loadMoreYoutube(
+      state,
+      action: PayloadAction<{ keyword: string; nextPageToken: string }>
+    ) {
+      state.loading = true;
+    },
+    loadMoreYoutubeSuccess(state, action: PayloadAction<YoutubeData>) {
+      if (!state.data) return state;
+      state.loading = false;
+      state.data.nextPageToken = action.payload.nextPageToken;
+      state.data.items = [...state.data.items, ...action.payload.items];
+    },
+    loadMoreYoutubeError(state, action: PayloadAction<Error>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    clearYoutubeData(state) {
+      state.loading = false;
+      state.data = null;
+      state.error = null;
+    },
   },
 });
 
 const { reducer, actions } = youtubeSlice;
 
-export const { getYoutube, getYoutubeSuccess, getYoutubeError } = actions;
+export const {
+  getYoutube,
+  getYoutubeSuccess,
+  getYoutubeError,
+  loadMoreYoutube,
+  loadMoreYoutubeError,
+  loadMoreYoutubeSuccess,
+  clearYoutubeData,
+} = actions;
 
 export default reducer;

@@ -1,22 +1,19 @@
 import * as S from './YoutubeList.style';
 import YoutubeItem from 'components/YoutubeItem';
-import { RootState } from 'modules';
-import { useSelector } from 'react-redux';
+import { Item } from 'types/youtube';
+import { SaveVideoData } from 'types/saveVideo';
 
-export default function YoutubeList() {
-  const { data } = useSelector((state: RootState) => state.youtube);
+interface VideoListProps {
+  videoList: Item[] | SaveVideoData[];
+  save?: boolean;
+}
 
+export default function YoutubeList({ videoList, save }: VideoListProps) {
   return (
     <S.YoutubeListContainer>
-      {data ? (
-        data.items.map(({ id, etag, snippet }) => (
-          <YoutubeItem
-            key={etag}
-            title={snippet.title}
-            channelTitle={snippet.channelTitle}
-            publishedAt={snippet.publishedAt}
-            videoId={id.videoId}
-          />
+      {videoList ? (
+        videoList.map(({ id, snippet }) => (
+          <YoutubeItem key={id.videoId} id={id} snippet={snippet} save={save} />
         ))
       ) : (
         <div>검색결과가 없습니다.</div>

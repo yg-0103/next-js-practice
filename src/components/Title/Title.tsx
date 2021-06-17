@@ -7,5 +7,9 @@ interface TitleProps {
 }
 
 export default function Title({ children, as }: TitleProps) {
-  return <S.Title as={as}>{children}</S.Title>;
+  return (
+    <S.Title title={`${children}`} as={as}>
+      {children}
+    </S.Title>
+  );
 }

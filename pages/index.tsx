@@ -1,9 +1,7 @@
-import Input from 'components/Input/Input';
-import Modal from 'container/Modal/Modal';
+import YoutubeList from 'container/YoutubeList';
+import { RootState } from 'modules';
+import { useSelector } from 'react-redux';
 export default function Home() {
-  return (
-    <div>
-      <Modal />
-    </div>
-  );
+  const saveVideo = useSelector((state: RootState) => state.saveVideo);
+  return <YoutubeList videoList={saveVideo} save={true} />;
 }
